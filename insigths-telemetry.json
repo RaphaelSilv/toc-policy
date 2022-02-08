@@ -1,0 +1,937 @@
+[
+    {
+        "Kind": "Headers",
+        "Content": {
+            "UserJourneyRecorderEndpoint": "urn:journeyrecorder:applicationinsights",
+            "CorrelationId": "ea9e5f4d-7e67-4253-8b1b-3f9ef32e43aa",
+            "EventInstance": "Event:API",
+            "TenantId": "<ourtenant>.onmicrosoft.com",
+            "PolicyId": "B2C_1A_AccountLink_SUSI_V2"
+        }
+    },
+    {
+        "Kind": "Transition",
+        "Content": {
+            "EventName": "API",
+            "StateName": "Initial"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.CrossSiteRequestForgeryValidationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "MACHSTATE": {
+                    "c": "2022-02-08T18:39:27.9673687Z",
+                    "k": "MACHSTATE",
+                    "v": "Initial",
+                    "p": true
+                },
+                "JC": {
+                    "c": "2022-02-08T18:39:16.4828424Z",
+                    "k": "JC",
+                    "v": "en-US",
+                    "p": true
+                },
+                "ORCH_CS": {
+                    "c": "2022-02-08T18:39:29.431284Z",
+                    "k": "ORCH_CS",
+                    "v": "1",
+                    "p": true
+                },
+                "ORCH_IDX": {
+                    "c": "2022-02-08T18:39:16.857866Z",
+                    "k": "ORCH_IDX",
+                    "v": "0",
+                    "p": true
+                },
+                "RA": {
+                    "c": "2022-02-08T18:39:16.857866Z",
+                    "k": "RA",
+                    "v": "0",
+                    "p": true
+                },
+                "RPP": {
+                    "c": "2022-02-08T18:39:16.4671999Z",
+                    "k": "RPP",
+                    "v": "OAUTH2",
+                    "p": true
+                },
+                "RPIPP": {
+                    "c": "2022-02-08T18:39:16.4671999Z",
+                    "k": "RPIPP",
+                    "v": "OAuth2ProtocolProvider",
+                    "p": true
+                },
+                "OTID": {
+                    "c": "2022-02-08T18:39:16.4828424Z",
+                    "k": "OTID",
+                    "v": "<ourtenant>.onmicrosoft.com",
+                    "p": true
+                },
+                "APPMV": {
+                    "c": "2022-02-08T18:39:16.4828424Z",
+                    "k": "APPMV",
+                    "v": "V2",
+                    "p": true
+                },
+                "CT": {
+                    "c": "2022-02-08T18:39:16.826666Z",
+                    "k": "CT",
+                    "v": "Spa",
+                    "p": true
+                },
+                "IC": {
+                    "c": "2022-02-08T18:39:16.8421991Z",
+                    "k": "IC",
+                    "v": "False",
+                    "p": true
+                },
+                "REAUTH": {
+                    "c": "2022-02-08T18:39:16.8421991Z",
+                    "k": "REAUTH",
+                    "v": "True",
+                    "p": true
+                },
+                "MSG(0a5b2bbd-83b9-45af-a23f-db2727e900e8)": {
+                    "c": "2022-02-08T18:39:16.8421991Z",
+                    "k": "MSG(0a5b2bbd-83b9-45af-a23f-db2727e900e8)",
+                    "v": "{\"TenantId\":\"<ourtenant>.onmicrosoft.com\",\"PolicyId\":\"B2C_1A_AccountLink_SUSI_V2\",\"RedirectUri\":\"https://jwt.ms/\",\"AdditionalParameters\":{\"p\":\"B2C_1A_ACCOUNTLINK_SUSI_V2\"},\"Nonce\":\"defaultNonce\",\"ClientId\":\"4a73e429-cc3c-481b-8230-1e755a3fe437\",\"ResponseType\":\"id_token\",\"ResponseRedirector\":{\"URI\":\"https://jwt.ms/\",\"D\":false,\"WF\":true,\"R\":false},\"Scope\":\"openid\",\"AppModelVersion\":1,\"ScopedProviders\":[]}",
+                    "p": true,
+                    "t": "OAuth2"
+                },
+                "IMESSAGE": {
+                    "c": "2022-02-08T18:39:16.8421991Z",
+                    "k": "IMESSAGE",
+                    "v": "0a5b2bbd-83b9-45af-a23f-db2727e900e8",
+                    "p": true
+                },
+                "EID": {
+                    "c": "2022-02-08T18:39:16.87348Z",
+                    "k": "EID",
+                    "v": "urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:2.1.5",
+                    "p": true
+                },
+                "Complex-CLMS": {
+                    "signInName": "<user-email>@gmail.com",
+                    "objectId": "81042fcc-c06c-4184-857e-5d830bcbbb32",
+                    "authenticationSource": "localAccountAuthentication",
+                    "isLocalSignUp": "False"
+                },
+                "ValidationRequest": {
+                    "ContentType": "Unspecified",
+                    "Created": "2022-02-08T18:39:27.9361195Z",
+                    "Key": "ValidationRequest",
+                    "Persistent": true,
+                    "Value": "client_id=63768af3-24c8-4acb-8578-d805fd3eac22&resource=3324c4d4-95e6-48c6-adf5-8d908d8c2d7b&username=<user-email>%40gmail.com&password=*&grant_type=password&scope=openid&nca=1;1;login-NonInteractive;False"
+                },
+                "ValidationResponse": {
+                    "ContentType": "Json",
+                    "Created": "2022-02-08T18:39:27.9361195Z",
+                    "Key": "ValidationResponse",
+                    "Persistent": true,
+                    "Value": "{\"token_type\":\"Bearer\",\"scope\":\"user_impersonation\",\"expires_in\":\"4767\",\"ext_expires_in\":\"4767\",\"expires_on\":\"1644350335\",\"not_before\":\"1644345267\",\"resource\":\"3324c4d4-95e6-48c6-adf5-8d908d8c2d7b\",\"access_token\":\"<token>\",\"refresh_token\":\"0.ASIAZBKqK2cBRU6-hr_t-o8h0POKdmPIJMtKhXjYBf0-rCIjANE.AgABAAAAAAD--DLA3VO7QrddgJg7WevrAgDs_wQA9P_aO5Wiks5D_-Tl1U2tuvrcrEK0AA5h6pFPRnqFw-grEROPYf0hlO1R-k8ED9AOxiYckN5uwM0NRXkQaEcfKOJ1uTOBS1ehk__S-zo6LnWprR8l_r-OXK6_yrSFaiALmNc9NlBqhMPygDrk77oqVPhX4FtLLwfV4ajeZ_Q_IGzZ2tpG1FuPpwOq-a08YS71n_ciJ6xkQZOQ3_Rx-Nos5mrlNLUImTCk3JN54Ue9O5v0tyzGO3-Wnt2aRfFi7khDOaPsGW644jNgj6znTwbHA7pP-zgKtLhfC4OxjQHN6fnOa1PCnyoYI8H2VpKQwMvsk8LTwAGl4Wk6gdWJudIUL1xwalKrSp5S8zZJ7WP9wR4Wb-4kcmmjgCDUrT7vr6dbphfCFjOpGFCRE4sdU8Vk4moDNnpM1jd9E-6pp_GQMAwmwdwm6wvDboWWpefG99wzO40VsxB_0QA4ccS16g8Tj2jLIXpCKCbwIbaEbQykh7pu94CN4PL7a02VQxR_DE4PX7h_ur6wp_-xAm7RFiYX8f86id57Gkgg_Ck4PEj85e27FYXqrYvpX6X20Vws4RnOWBhjmDxMmqrQjKZwmUBeIs7XMjnprONkIa7yMqqfxq5lW1qIcy9lD8ynF5a8HK2JVnlSl5kqtbvz2MEIHdeMRRDLIvz-umngk6R5PoqFBNT2W1G89mzsIfRgCb0Jf0QgUH38XydPocZsWeuYnrVQe-du1ofOss-D-7jXlyFowBi4NW4G4MTC6EviuGOeefZoaWWLSB_3a_7xSSnqMfw7yUF79g6N3ufCDn34I13Oy0wqwbK5y1GnbM82bQtAR2cMm2eqXPACYL3OMte4o7kasAU_B4xaEdg_qqgt0O6B4pzhgVP-6DXwfVxm33EQoiiDHsE0O8Od0XCEXMHeTdX_WLxcCk4Zc0MhomwfNbLcJxxlDR5yFftOQU0GAgjxog\",\"id_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiI2Mzc2OGFmMy0yNGM4LTRhY2ItODU3OC1kODA1ZmQzZWFjMjIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8yYmFhMTI2NC0wMTY3LTRlNDUtYmU4Ni1iZmVkZmE4ZjIxZDAvIiwiaWF0IjoxNjQ0MzQ1MjY3LCJuYmYiOjE2NDQzNDUyNjcsImV4cCI6MTY0NDM0OTE2NywiYW1yIjpbInB3ZCJdLCJnaXZlbl9uYW1lIjoiUmFwaGFlbCByYW1vcyBkYSBzaWx2YSIsImlwYWRkciI6IjE3Ny4yMDIuMjU1LjE3NSIsIm5hbWUiOiJSYXBoYWVsIHJhbW9zIGRhIHNpbHZhIiwib2lkIjoiODEwNDJmY2MtYzA2Yy00MTg0LTg1N2UtNWQ4MzBiY2JiYjMyIiwicmgiOiIwLkFTSUFaQktxSzJjQlJVNi1ocl90LW84aDBQT0tkbVBJSk10S2hYallCZjAtckNJakFORS4iLCJzdWIiOiJMZmpLWTgyYUhKTnZxX3dZMHFBRW1yZEhDcTRPZ3pHZ2ZZY0V6b2REVFRRIiwidGlkIjoiMmJhYTEyNjQtMDE2Ny00ZTQ1LWJlODYtYmZlZGZhOGYyMWQwIiwidW5pcXVlX25hbWUiOiI4MTA0MmZjYy1jMDZjLTQxODQtODU3ZS01ZDgzMGJjYmJiMzJAc2VyY29sbXNkZXYub25taWNyb3NvZnQuY29tIiwidXBuIjoiODEwNDJmY2MtYzA2Yy00MTg0LTg1N2UtNWQ4MzBiY2JiYjMyQHNlcmNvbG1zZGV2Lm9ubWljcm9zb2Z0LmNvbSIsInZlciI6IjEuMCJ9.\"};1;login-NonInteractive;False"
+                },
+                "CTP": {
+                    "c": "2022-02-08T18:39:27.9517487Z",
+                    "k": "CTP",
+                    "v": "SelfAsserted-LocalAccountSignin-Email:1",
+                    "p": true
+                },
+                "SE": {
+                    "c": "2022-02-08T18:39:27.9673687Z",
+                    "k": "SE",
+                    "v": "Self-asserted_local",
+                    "p": true
+                },
+                "CMESSAGE": {
+                    "c": "2022-02-08T18:39:29.3844079Z",
+                    "k": "CMESSAGE",
+                    "v": "0a5b2bbd-83b9-45af-a23f-db2727e900e8",
+                    "p": true
+                },
+                "ComplexItems": "_MachineEventQ, REPRM, TCTX"
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.JourneyRestartHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.ValidateApiResponseHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "Complex-API_RESULT": {
+                    "IsCancelled": "False",
+                    "IsErrored": "False",
+                    "IsContinue": "True",
+                    "IsAlternate": "False",
+                    "rememberMe": "false",
+                    "csrf_token": "UU5qeVV1M2REUFQvSWZ0ZlVvN3RQSU9DNjBXTTBuUjA1VTdRR25vMkZJVlQ0dlBOeGpldWpkSDVKZ2tkUUUxRExpam96UGVHZ1NJeENON0hFOHJHaHc9PTsyMDIyLTAyLTA4VDE4OjM5OjE2Ljg3MzQ4WjtyMkFKYklqRnAxMklSSzhvUXhLWHBBPT07eyJPcmNoZXN0cmF0aW9uU3RlcCI6MX0=",
+                    "tx": "StateProperties=eyJUSUQiOiJlYTllNWY0ZC03ZTY3LTQyNTMtOGIxYi0zZjllZjMyZTQzYWEifQ",
+                    "p": "B2C_1A_AccountLink_SUSI_V2",
+                    "diags": "{\"pageViewId\":\"679fabad-4d73-4094-83eb-01a0d898d84b\",\"pageId\":\"CombinedSigninAndSignup\",\"trace\":[{\"ac\":\"T005\",\"acST\":1644345557,\"acD\":2},{\"ac\":\"T021 - URL:https://stlmspordev001.blob.core.windows.net/auth-static-files/custom_sign_in.html\",\"acST\":1644345557,\"acD\":64},{\"ac\":\"T019\",\"acST\":1644345557,\"acD\":3},{\"ac\":\"T004\",\"acST\":1644345557,\"acD\":1},{\"ac\":\"T003\",\"acST\":1644345557,\"acD\":1},{\"ac\":\"T035\",\"acST\":1644345558,\"acD\":0},{\"ac\":\"T030Online\",\"acST\":1644345558,\"acD\":0},{\"ac\":\"T002\",\"acST\":1644345568,\"acD\":0},{\"ac\":\"T018T010\",\"acST\":1644345563,\"acD\":4309}]}"
+                }
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.NoOpHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.SwitchFromProtocolToApiHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Transition",
+        "Content": {
+            "EventName": "COMBINEDSIGNINANDSIGNUP/Success",
+            "StateName": "Initial"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeComplete"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "ComplexItems": "_MachineEventQ, REPRM, S_CTP, TCTX"
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.NoOpHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.SSO.SSOSessionHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.OrchestrationManager"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "ORCH_CS": {
+                    "c": "2022-02-08T18:39:29.4937808Z",
+                    "k": "ORCH_CS",
+                    "v": "8",
+                    "p": true
+                },
+                "ComplexItems": "_MachineEventQ, ORCH_IDX, REPRM, S_CTP, TCTX"
+            }
+        }
+    },
+    {
+        "Kind": "Transition",
+        "Content": {
+            "EventName": "ClaimsExchange",
+            "StateName": "AwaitingNextStep"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.ShouldOrchestrationStepBeInvokedHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "RecorderRecord": {
+                "Values": [
+                    {
+                        "Key": "EnabledForUserJourneysTrue",
+                        "Value": {
+                            "Values": [
+                                {
+                                    "Key": "CurrentStep",
+                                    "Value": 8
+                                },
+                                {
+                                    "Key": "TechnicalProfileEnabled",
+                                    "Value": {
+                                        "EnabledRule": "Always",
+                                        "EnabledResult": true,
+                                        "TechnicalProfile": "AAD-UserReadUsingObjectId"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Statebag": {
+                "MACHSTATE": {
+                    "c": "2022-02-08T18:39:29.4937808Z",
+                    "k": "MACHSTATE",
+                    "v": "AwaitingNextStep",
+                    "p": true
+                }
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeProtocolARedirectionHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "TAGE": {
+                    "c": "2022-02-08T18:39:29.5094086Z",
+                    "k": "TAGE",
+                    "v": "AADUserReadWithObjectId",
+                    "p": true
+                }
+            },
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeProtocolAnApiHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.SSO.IsSSOSessionParticipantHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeProtocolAServiceCallHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "RecorderRecord": {
+                "Values": [
+                    {
+                        "Key": "InitiatingClaimsExchange",
+                        "Value": {
+                            "ProtocolType": "backend protocol",
+                            "TargetEntity": "AADUserReadWithObjectId",
+                            "TechnicalProfileId": "AAD-UserReadUsingObjectId",
+                            "ProtocolProviderType": "AzureActiveDirectoryProvider"
+                        }
+                    }
+                ]
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.GenerateRequestInputParamsHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": false
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.InputClaimsTransformationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.PersistedClaimsTransformationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.OutputClaimsTransformationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "RecorderRecord": {
+                "Values": [
+                    {
+                        "Key": "GettingClaims",
+                        "Value": {
+                            "Values": [
+                                {
+                                    "Key": "InitiatingBackendClaimsExchange",
+                                    "Value": {
+                                        "TechnicalProfileId": "AAD-UserReadUsingObjectId",
+                                        "ProtocolProviderType": "AzureActiveDirectoryProvider"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Statebag": {
+                "Complex-CLMS": {
+                    "signInName": "<user-email>@gmail.com",
+                    "objectId": "81042fcc-c06c-4184-857e-5d830bcbbb32",
+                    "authenticationSource": "localAccountAuthentication",
+                    "isLocalSignUp": "False",
+                    "signInNames.emailAddress": "<user-email>@gmail.com",
+                    "displayName": "<user-name>",
+                    "givenName": "<user-name>"
+                },
+                "PROT": {
+                    "c": "2022-02-08T18:39:29.8219173Z",
+                    "k": "PROT",
+                    "v": "AAD Request to https://graph.windows.net/2baa1264-0167-4e45-be86-bfedfa8f21d0/users/81042fcc-c06c-4184-857e-5d830bcbbb32?api-version=1.6-integrationOnly using method GET as request body is malformed.\r\nResponse: \n{\"odata.metadata\":\"https://graph.windows.net/2baa1264-0167-4e45-be86-bfedfa8f21d0/$metadata#directoryObjects/@Element\",\"odata.type\":\"Microsoft.WindowsAzure.ActiveDirectory.User\",\"objectType\":\"User\",\"objectId\":\"81042fcc-c06c-4184-857e-5d830bcbbb32\",\"softDeletionTimestamp\":null,\"accountEnabled\":true,\"ageGroup\":null,\"alternativeSecurityIds\":[],\"alternativeSignInNamesInfo\":[{\"type\":\"emailAddress\",\"value\":\"<user-email>@gmail.com\"}],\"appMetadata\":null,\"city\":null,\"consentProvidedForMinor\":null,\"country\":null,\"createdDateTime\":\"2022-02-08T18:36:14Z\",\"creationType\":\"NameCoexistence\",\"department\":null,\"displayName\":\"<user-name>\",\"facsimileTelephoneNumber\":null,\"givenName\":\"<user-name>\",\"immutableId\":null,\"jobTitle\":null,\"legalAgeGroupClassification\":null,\"logonIdentifiers\":[{\"type\":\"emailAddress\",\"value\":\"<user-email>@gmail.com\"}],\"mail\":null,\"mailNickname\":\"81042fcc-c06c-4184-857e-5d830bcbbb32\",\"mobile\":null,\"netId\":\"10032001D9480747\",\"otherMails\":[],\"passwordPolicies\":\"DisablePasswordExpiration\",\"passwordProfile\":null,\"physicalDeliveryOfficeName\":null,\"postalCode\":null,\"preferredLanguage\":null,\"primarySMTPAddress\":null,\"refreshTokensValidFromDateTime\":\"2022-02-08T18:36:14Z\",\"selfServePasswordResetData\":null,\"signInName\":\"81042fcc-c06c-4184-857e-5d830bcbbb32@<ourtenant>.onmicrosoft.com\",\"state\":null,\"streetAddress\":null,\"strongAuthenticationDetail\":{\"encryptedPinHash\":null,\"encryptedPinHashHistory\":null,\"methods\":[],\"oathTokenMetadata\":[],\"requirements\":[],\"phoneAppDetails\":[],\"proofupTime\":null,\"verificationDetail\":null},\"surname\":null,\"telephoneNumber\":null,\"thumbnailPhoto@odata.mediaEditLink\":\"directoryObjects/81042fcc-c06c-4184-857e-5d830bcbbb32/Microsoft.WindowsAzure.ActiveDirectory.User/thumbnailPhoto\",\"usageLocation\":null,\"userPrincipalName\":\"81042fcc-c06c-4184-857e-5d830bcbbb32@<ourtenant>.onmicrosoft.com\",\"userState\":null,\"userStateChangedOn\":null,\"userType\":\"Member\",\"extension_9614eff520454054b6d79fbe0c7a5491_termsOfUseConsentVersion\":\"V1\",\"extension_9614eff520454054b6d79fbe0c7a5491_termsOfUseConsentChoice\":\"AgreeToTermsOfUseConsentYes\",\"extension_9614eff520454054b6d79fbe0c7a5491_termsOfUseConsentDateTime@odata.type\":\"Edm.DateTime\",\"extension_9614eff520454054b6d79fbe0c7a5491_termsOfUseConsentDateTime\":\"2022-02-08T18:35:59.4614918Z\",\"extension_9614eff520454054b6d79fbe0c7a5491_haspassword\":true,\"extension_9614eff520454054b6d79fbe0c7a5491_isUserProfileComplete\":false}\r\n",
+                    "p": false
+                }
+            }
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.SSO.SSOSessionHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.OrchestrationManager"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "ORCH_CS": {
+                    "c": "2022-02-08T18:39:29.8219173Z",
+                    "k": "ORCH_CS",
+                    "v": "9",
+                    "p": true
+                }
+            }
+        }
+    },
+    {
+        "Kind": "Transition",
+        "Content": {
+            "EventName": "ClaimsExchange",
+            "StateName": "AwaitingNextStep"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.ShouldOrchestrationStepBeInvokedHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "RecorderRecord": {
+                "Values": [
+                    {
+                        "Key": "EnabledForUserJourneysTrue",
+                        "Value": {
+                            "Values": [
+                                {
+                                    "Key": "CurrentStep",
+                                    "Value": 9
+                                },
+                                {
+                                    "Key": "TechnicalProfileEnabled",
+                                    "Value": {
+                                        "EnabledRule": "Always",
+                                        "EnabledResult": true,
+                                        "TechnicalProfile": "Check-TOU-Status"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeProtocolARedirectionHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeProtocolAnApiHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.SSO.IsSSOSessionParticipantHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeProtocolAServiceCallHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "RecorderRecord": {
+                "Values": [
+                    {
+                        "Key": "InitiatingClaimsExchange",
+                        "Value": {
+                            "ProtocolType": "backend protocol",
+                            "TargetEntity": "AADUserReadWithObjectId",
+                            "TechnicalProfileId": "Check-TOU-Status",
+                            "ProtocolProviderType": "AzureActiveDirectoryProvider"
+                        }
+                    }
+                ]
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.GenerateRequestInputParamsHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": false
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.InputClaimsTransformationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.PersistedClaimsTransformationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.OutputClaimsTransformationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "RecorderRecord": {
+                "Values": [
+                    {
+                        "Key": "GettingClaims",
+                        "Value": {
+                            "Values": [
+                                {
+                                    "Key": "InitiatingBackendClaimsExchange",
+                                    "Value": {
+                                        "TechnicalProfileId": "Check-TOU-Status",
+                                        "ProtocolProviderType": "AzureActiveDirectoryProvider"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "OutputClaimsTransformation",
+                        "Value": {
+                            "Values": [
+                                {
+                                    "Key": "ClaimsTransformation",
+                                    "Value": {
+                                        "Values": [
+                                            {
+                                                "Key": "Id",
+                                                "Value": "IsTermsOfUseConsentRequiredForDateTime"
+                                            },
+                                            {
+                                                "Key": "InputClaim",
+                                                "Value": {
+                                                    "PolicyClaimType": "extension_termsOfUseConsentDateTime",
+                                                    "Value": "2/8/2022 6:35:59 PM"
+                                                }
+                                            },
+                                            {
+                                                "Key": "InputParameter",
+                                                "Value": {
+                                                    "Id": "termsOfUseTextUpdateDateTime",
+                                                    "Value": "1/1/2023 3:00:00 PM"
+                                                }
+                                            },
+                                            {
+                                                "Key": "Result",
+                                                "Value": {
+                                                    "PolicyClaimType": "termsOfUseConsentRequired",
+                                                    "Value": "True"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Statebag": {
+                "Complex-CLMS": {
+                    "signInName": "<user-email>@gmail.com",
+                    "objectId": "81042fcc-c06c-4184-857e-5d830bcbbb32",
+                    "authenticationSource": "localAccountAuthentication",
+                    "isLocalSignUp": "False",
+                    "signInNames.emailAddress": "<user-email>@gmail.com",
+                    "displayName": "<user-name>",
+                    "givenName": "<user-name>",
+                    "extension_termsOfUseConsentDateTime": "2/8/2022 6:35:59 PM",
+                    "termsOfUseConsentRequired": "True"
+                }
+            }
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.SSO.SSOSessionHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.OrchestrationManager"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "ORCH_CS": {
+                    "c": "2022-02-08T18:39:30.1187854Z",
+                    "k": "ORCH_CS",
+                    "v": "10",
+                    "p": true
+                }
+            }
+        }
+    },
+    {
+        "Kind": "Transition",
+        "Content": {
+            "EventName": "ClaimsExchange",
+            "StateName": "AwaitingNextStep"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.ShouldOrchestrationStepBeInvokedHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "RecorderRecord": {
+                "Values": [
+                    {
+                        "Key": "EnabledForUserJourneysTrue",
+                        "Value": {
+                            "Values": [
+                                {
+                                    "Key": "CurrentStep",
+                                    "Value": 10
+                                },
+                                {
+                                    "Key": "TechnicalProfileEnabled",
+                                    "Value": {
+                                        "EnabledRule": "Always",
+                                        "EnabledResult": true,
+                                        "TechnicalProfile": "SelfAsserted-Input-ToU-SignIn"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeProtocolARedirectionHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsClaimsExchangeProtocolAnApiHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "RecorderRecord": {
+                "Values": [
+                    {
+                        "Key": "InitiatingClaimsExchange",
+                        "Value": {
+                            "ProtocolType": "Identity Experience Engine API",
+                            "TargetEntity": "AADUserReadWithObjectId",
+                            "TechnicalProfileId": "SelfAsserted-Input-ToU-SignIn",
+                            "ProtocolProviderType": "SelfAssertedAttributeProvider"
+                        }
+                    }
+                ]
+            },
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.SwitchToApiOrchestrationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Transition",
+        "Content": {
+            "EventName": "SELFASSERTED",
+            "StateName": "AwaitingNextStep"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.SSO.IsSSOSessionParticipantHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.IsSelfAssertedEmpty"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.InputClaimsTransformationHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "Complex-CLMS": {
+                    "signInName": "<user-email>@gmail.com",
+                    "objectId": "81042fcc-c06c-4184-857e-5d830bcbbb32",
+                    "authenticationSource": "localAccountAuthentication",
+                    "isLocalSignUp": "False",
+                    "signInNames.emailAddress": "<user-email>@gmail.com",
+                    "displayName": "<user-name>",
+                    "givenName": "<user-name>",
+                    "extension_termsOfUseConsentDateTime": "2/8/2022 6:35:59 PM",
+                    "termsOfUseConsentRequired": "True",
+                    "extension_termsOfUseConsentChoice": "AgreeToTermsOfUseConsentNo"
+                }
+            }
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.ConvertToAttributeFieldHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "MACHSTATE": {
+                    "c": "2022-02-08T18:39:30.1500348Z",
+                    "k": "MACHSTATE",
+                    "v": "Microsoft.Cpim.Common.PolicyException",
+                    "p": true
+                },
+                "ComplexItems": "_MachineEventQ, ORCH_IDX, REPRM, S_CTP, TCTX, M_EXCP"
+            },
+            "PredicateResult": "False"
+        }
+    },
+    {
+        "Kind": "Transition",
+        "Content": {
+            "EventName": "SelfAsserted",
+            "StateName": "Microsoft.Cpim.Common.PolicyException"
+        }
+    },
+    {
+        "Kind": "Predicate",
+        "Content": "Web.TPEngine.StateMachineHandlers.NoOpHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "PredicateResult": "True"
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.WarningExceptionTraceHandler"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true
+        }
+    },
+    {
+        "Kind": "Action",
+        "Content": "Web.TPEngine.StateMachineHandlers.SendErrorResponseToXmlHttpRequestClient"
+    },
+    {
+        "Kind": "HandlerResult",
+        "Content": {
+            "Result": true,
+            "Statebag": {
+                "SE": {
+                    "c": "2022-02-08T18:39:30.1657048Z",
+                    "k": "SE",
+                    "v": "",
+                    "p": true
+                }
+            }
+        }
+    }
+]

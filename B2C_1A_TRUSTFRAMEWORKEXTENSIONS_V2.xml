@@ -1,0 +1,988 @@
+<TrustFrameworkPolicy
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+    PolicySchemaVersion="0.3.0.0" 
+    TenantId="{Settings:Tenant}" 
+    PolicyId="B2C_1A_TrustFrameworkExtensions_V2" 
+    PublicPolicyUri="http://{Settings:Tenant}/B2C_1A_TrustFrameworkExtensions_V2" 
+    TenantObjectId="{Settings:TenantId}">
+    <BasePolicy>
+      <TenantId>{Settings:Tenant}</TenantId>
+      <PolicyId>B2C_1A_TrustFrameworkBase</PolicyId>
+    </BasePolicy>
+  
+    <BuildingBlocks>
+      <ClaimsSchema>
+        <ClaimType Id="socialEmail">
+          <DisplayName>socialEmail</DisplayName>
+          <DataType>string</DataType>
+          <AdminHelpText>socialEmail</AdminHelpText>
+          <UserHelpText>socialEmail</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="identityProviderAccessToken">
+            <DisplayName>Identity Provider Access Token</DisplayName>
+            <DataType>string</DataType>
+            <AdminHelpText>Stores the access token of the identity provider.</AdminHelpText>
+        </ClaimType>
+        <ClaimType Id="isLocalSignUp">
+          <DisplayName>isLocalSignUp</DisplayName>
+          <DataType>boolean</DataType>
+          <AdminHelpText>Whether the user has clicked SignUp</AdminHelpText>
+        </ClaimType>
+        <ClaimType Id="extension_isUserProfileComplete">
+          <DisplayName>extension_isUserProfileComplete</DisplayName>
+          <DataType>boolean</DataType>
+          <AdminHelpText>Whether the user has filled in all information required at the signup</AdminHelpText>
+        </ClaimType>
+        <!-- Claim type needed for LinkedIn claims transformations -->
+        <ClaimType Id="nullStringClaim">
+          <DisplayName>nullClaim</DisplayName>
+          <DataType>string</DataType>
+          <AdminHelpText>A policy claim to store output values from ClaimsTransformations that aren't useful. This claim should not be used in TechnicalProfiles.</AdminHelpText>
+          <UserHelpText>A policy claim to store output values from ClaimsTransformations that aren't useful. This claim should not be used in TechnicalProfiles.</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="extension_Roles">
+          <DisplayName>Roles</DisplayName>
+          <DataType>string</DataType>
+        </ClaimType>
+        <ClaimType Id="extension_termsOfUseConsentChoice">
+          <DisplayName>Terms of Use</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" I agree to the Terms Of Service" Value="AgreeToTermsOfUseConsentYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_termsOfPersonalDataChoice">
+          <DisplayName></DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" I agree to the Terms Of Personal Data Use" Value="AgreeToTermsOfPersonalDataUseYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_marketingConsentEmail">
+          <DisplayName>Marketing options</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" Marketing consent to send e-mail" Value="AgreeTorReceiveEmailYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_marketingConsentSMS">
+          <DisplayName></DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" Marketing consent to send SMS" Value="AgreeTorReceiveSMSYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_marketingConsentPhone">
+          <DisplayName></DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" Marketing consent to send Phone Call" Value="AgreeTorReceivePhoneYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+         <ClaimType Id="extension_termsOfThirdPartyDataChoice">
+          <DisplayName>Third Party Data Access</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" I agree to the Terms Of Third Party Data Use" Value="AgreeToTermsOfThirdPartyDataUseYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="currentTime">
+          <DisplayName>Current Time</DisplayName>
+          <DataType>dateTime</DataType>
+          <AdminHelpText>Current date time in UTC.</AdminHelpText>
+          <UserHelpText>Current date time in UTC.</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="extension_termsOfUseConsentDateTime">
+          <DisplayName>Terms of Use Consent Date Time</DisplayName>
+          <DataType>dateTime</DataType>
+          <AdminHelpText>Terms of Use Consent date time in UTC.</AdminHelpText>
+          <UserHelpText>Terms of Use Consent date time in UTC.</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="termsOfUseConsentRequired">
+          <DisplayName>Terms of Use Consent Required</DisplayName>
+          <DataType>boolean</DataType>
+          <AdminHelpText>Boolean that specifies if Terms of Use Consent is required or not.</AdminHelpText>
+          <UserHelpText>Boolean that specifies if Terms of Use Consent is required or not</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="extension_termsOfUseConsentVersion">
+          <DisplayName>Terms of Use Consent Version</DisplayName>
+          <DataType>string</DataType>
+          <AdminHelpText>Terms of Use Consent Version.</AdminHelpText>
+          <UserHelpText>Terms of Use Consent Version.</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="extension_dateOfBirth">
+          <DisplayName>Data of birth</DisplayName>
+          <DataType>dateTime</DataType>
+          <UserInputType>DateTimeDropdown</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_residentialPostcode">
+          <DisplayName>Residential Postcode</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_Nino">
+          <DisplayName>National Insurance Number</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_PhoneNumber">
+          <DisplayName>Phone Number</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_worklPostcode">
+          <DisplayName>Work Postcode</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_rightToLiveAndWorkInTheUK">
+          <DisplayName>Citizen status</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" Right to live and work in the UK" Value="RightToLiveAndWorkInTheUKYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_employementStatus">
+          <DisplayName>Employment status</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" Currently employed" Value="CurrentEmployedYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_apprenticeshipStatus">
+          <DisplayName>Apprenticeship status</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text=" Currently taken an apprenticeship" Value="CurrentApprenticeshipYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_annualSalary">
+          <DisplayName>Anual salary</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_courseSubjectPreference">
+          <DisplayName>Course subject preference</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>DropdownSingleSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text="Administration" Value="Administration" SelectByDefault="false" />
+            <Enumeration Text="Building and construction" Value="Building and construction" SelectByDefault="false" />
+            <Enumeration Text="Business management" Value="Business management" SelectByDefault="false" />
+            <Enumeration Text="Foundations for learning and life" Value="Foundations for learning and life" SelectByDefault="false" />
+            <Enumeration Text="ICT for users" Value="ICT for users" SelectByDefault="false" />
+            <Enumeration Text="ICT practitioners" Value="ICT practitioners" SelectByDefault="false" />
+            <Enumeration Text="Manufacturing technologies" Value="Manufacturing technologies" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_qualifyForBenefits">
+          <DisplayName>Qualify For Benefits</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text="Do qualify for benefits" Value="QualifyForBenefitsYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_totalHouseHoldIncome">
+          <DisplayName>Total House Hold Income</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_UKCitzen">
+          <DisplayName>UK Citizenship</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text="Uk Citzen" Value="UKCitzenYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_salaryWage">
+          <DisplayName>Salary Wage</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>CheckboxMultiSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text="Less than £18,135" Value="TotalHouseHoldIncomeLessLimitYes" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_telephone">
+          <DisplayName>Telephone Number</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_city">
+          <DisplayName>City / Town</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+        <ClaimType Id="extension_gender">
+          <DisplayName>Gender</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>DropdownSingleSelect</UserInputType>
+          <Restriction>
+            <Enumeration Text="Male" Value="Male" SelectByDefault="false" />
+            <Enumeration Text="Female" Value="Female" SelectByDefault="false" />
+          </Restriction>
+        </ClaimType>
+        <ClaimType Id="extension_address">
+          <DisplayName>Address</DisplayName>
+          <DataType>string</DataType>
+          <UserInputType>TextBox</UserInputType>
+        </ClaimType>
+       
+        <!-- ACCOUNT LINK CLAIM TYPES -->
+        <ClaimType Id="userIdentity">
+          <DisplayName>userIdentity</DisplayName>
+          <DataType>userIdentity</DataType>
+          <AdminHelpText>userIdentity</AdminHelpText>
+          <UserHelpText>userIdentity</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="userIdentities">
+          <DisplayName>userIdentities</DisplayName>
+          <DataType>userIdentityCollection</DataType>
+          <AdminHelpText>userIdentities</AdminHelpText>
+          <UserHelpText>userIdentities</UserHelpText>
+        </ClaimType> 
+        <ClaimType Id="issuers">
+          <DisplayName>issuers</DisplayName>
+          <DataType>stringCollection</DataType>
+          <UserHelpText>User identity providers. This information is received from alternativeSecurityIds</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="userIdentityToLink">
+          <DisplayName>userIdentityToLink</DisplayName>
+          <DataType>userIdentity</DataType>
+          <AdminHelpText>userIdentityToLink</AdminHelpText>
+          <UserHelpText>userIdentityToLink</UserHelpText>
+        </ClaimType> 
+        <ClaimType Id="issuerUserIdToLink">
+          <DisplayName>issuerUserIdToLink</DisplayName>
+          <DataType>string</DataType>
+          <AdminHelpText>issuerUserIdToLink</AdminHelpText>
+          <UserHelpText>issuerUserIdToLink</UserHelpText>
+        </ClaimType> 
+        <ClaimType Id="issuerToLink">
+          <DisplayName>issuerToLink</DisplayName>
+          <DataType>string</DataType>
+          <AdminHelpText>issuerToLink</AdminHelpText>
+          <UserHelpText>issuerToLink</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="issuerToUnlink">
+          <DisplayName>issuerToUnlink</DisplayName>
+          <DataType>string</DataType>
+          <AdminHelpText>issuerToUnlink</AdminHelpText>
+          <UserHelpText>issuerToUnlink</UserHelpText>
+        </ClaimType>  
+        <ClaimType Id="newUserIdentities">
+          <DisplayName>userIdentities</DisplayName>
+          <DataType>userIdentityCollection</DataType>
+          <AdminHelpText>userIdentities</AdminHelpText>
+          <UserHelpText>userIdentities</UserHelpText>
+        </ClaimType>  
+        <ClaimType Id="localAccountEmail">
+          <DisplayName>localAccountEmail</DisplayName>
+          <DataType>string</DataType>
+          <AdminHelpText>localAccountEmail</AdminHelpText>
+          <UserHelpText>localAccountEmail</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="currentUserIdentities">
+          <DisplayName>currentUserIdentities</DisplayName>
+          <DataType>userIdentityCollection</DataType>
+          <AdminHelpText>currentUserIdentities</AdminHelpText>
+          <UserHelpText>currentUserIdentities</UserHelpText>
+        </ClaimType> 
+        <ClaimType Id="extension_haspassword">
+          <DisplayName>has password</DisplayName>
+          <DataType>boolean</DataType>
+          <AdminHelpText>user has password</AdminHelpText>
+          <UserHelpText>user has password</UserHelpText>
+        </ClaimType>
+        <ClaimType Id="localAccountUpn">
+          <DisplayName>localAccountUpn</DisplayName>
+          <DataType>string</DataType>
+          <AdminHelpText>localAccountUpn</AdminHelpText>
+          <UserHelpText>localAccountUpn</UserHelpText>
+          <UserInputType>Readonly</UserInputType>
+        </ClaimType> 
+        <ClaimType Id="currentIssuers">
+          <DisplayName>issuers</DisplayName>
+          <DataType>stringCollection</DataType>
+          <UserHelpText>User identity providers. This information is received from alternativeSecurityIds</UserHelpText>
+        </ClaimType>     
+        <ClaimType Id="containsIssuerAlready">
+          <DisplayName>containsIssuerAlready</DisplayName>
+          <DataType>boolean</DataType>
+          <UserHelpText/>
+        </ClaimType>    
+      </ClaimsSchema>
+  
+      <ClaimsTransformations>
+        <ClaimsTransformation Id="GetCurrentDateTime" TransformationMethod="GetCurrentDateTime">
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="currentTime" TransformationClaimType="currentDateTime" />
+          </OutputClaims>
+        </ClaimsTransformation>
+        <!-- 
+        If the the date of consent is prior to the 2022-01-01T15:00:00.0000000Z, force a new acceptance by checking the termsOfUseConsentRequired Boolean claim, and displaying a self-asserted screen.
+        -->
+  
+        <ClaimsTransformation Id="IsTermsOfUseConsentRequiredForDateTime" TransformationMethod="IsTermsOfUseConsentRequired">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="extension_termsOfUseConsentDateTime" TransformationClaimType="termsOfUseConsentDateTime" />
+          </InputClaims>
+          <InputParameters>
+            <InputParameter Id="termsOfUseTextUpdateDateTime" DataType="dateTime" Value="2023-01-01T15:00:00.0000000Z" />
+          </InputParameters>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="termsOfUseConsentRequired" TransformationClaimType="result" />
+          </OutputClaims>
+        </ClaimsTransformation>
+  
+        <ClaimsTransformation Id="GetNewUserAgreeToTermsOfUseConsentVersion" TransformationMethod="CreateStringClaim">
+          <InputParameters>
+            <InputParameter Id="value" DataType="string" Value="V1"/>
+          </InputParameters>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="extension_termsOfUseConsentVersion" TransformationClaimType="createdClaim" />
+          </OutputClaims>
+        </ClaimsTransformation>
+  
+        <!-- Not used here, but this OR IsTermsOfUseConsentRequiredForDateTime check can be used -->
+        <ClaimsTransformation Id="IsTermsOfUseConsentRequiredForVersion" TransformationMethod="CompareClaimToValue">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="extension_termsOfUseConsentVersion" TransformationClaimType="inputClaim1" />
+          </InputClaims>
+          <InputParameters>
+            <InputParameter Id="compareTo" DataType="string" Value="V2" />
+            <InputParameter Id="operator" DataType="string" Value="not equal" />
+            <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+          </InputParameters>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="termsOfUseConsentRequired" TransformationClaimType="outputClaim" />
+          </OutputClaims>
+        </ClaimsTransformation>
+  
+        <ClaimsTransformation Id="CopySignInNameToEmail" TransformationMethod="FormatStringClaim">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="signInName" TransformationClaimType="inputClaim" />
+          </InputClaims>
+          <InputParameters>
+            <InputParameter Id="stringFormat" DataType="string" Value="{0}" />
+          </InputParameters>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="email" TransformationClaimType="outputClaim" />
+          </OutputClaims>
+        </ClaimsTransformation>
+  
+        <!-- Claim transformations needed for LinkedIn technical profile -->
+        <ClaimsTransformation Id="ExtractGivenNameFromLinkedInResponse" TransformationMethod="GetSingleItemFromJson">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="givenName" TransformationClaimType="inputJson" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="nullStringClaim" TransformationClaimType="key" />
+            <OutputClaim ClaimTypeReferenceId="givenName" TransformationClaimType="value" />
+          </OutputClaims>
+        </ClaimsTransformation>
+        <ClaimsTransformation Id="ExtractSurNameFromLinkedInResponse" TransformationMethod="GetSingleItemFromJson">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="surname" TransformationClaimType="inputJson" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="nullStringClaim" TransformationClaimType="key" />
+            <OutputClaim ClaimTypeReferenceId="surname" TransformationClaimType="value" />
+          </OutputClaims>
+        </ClaimsTransformation>
+  
+         <!-- Sample: On sign-in (first time) with social account, create a userIdentity claim, using issuerUserId and issuer name -->
+         <ClaimsTransformation Id="CreateUserIdentity" TransformationMethod="CreateUserIdentity">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="issuerUserId" TransformationClaimType="issuerUserId" />
+            <InputClaim ClaimTypeReferenceId="identityProvider" TransformationClaimType="issuer" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userIdentity" TransformationClaimType="userIdentity" />
+          </OutputClaims>
+        </ClaimsTransformation>    
+  
+        <!-- Sample: On sign-in (second time) with social account, create a userIdentityToLink claim, using issuerUserId and issuer name -->
+        <ClaimsTransformation Id="CreateUserIdentityToLink" TransformationMethod="CreateUserIdentity">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="issuerUserIdToLink" TransformationClaimType="issuerUserId" />
+            <InputClaim ClaimTypeReferenceId="issuerToLink" TransformationClaimType="issuer" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userIdentityToLink" TransformationClaimType="userIdentity" />
+          </OutputClaims>
+        </ClaimsTransformation>    
+  
+        <!--Sample: Add a userIdentity to the userIdentities collection. .-->
+        <ClaimsTransformation Id="AppendUserIdentity" TransformationMethod="AddItemToUserIdentityCollection">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="userIdentity" TransformationClaimType="item" />
+            <InputClaim ClaimTypeReferenceId="userIdentities" TransformationClaimType="collection" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userIdentities" TransformationClaimType="collection" />
+          </OutputClaims>
+        </ClaimsTransformation>
+        <ClaimsTransformation Id="AppendUserIdentityToLink" TransformationMethod="AddItemToUserIdentityCollection">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="userIdentityToLink" TransformationClaimType="item" />
+            <InputClaim ClaimTypeReferenceId="newUserIdentities" TransformationClaimType="collection" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="newUserIdentities" TransformationClaimType="collection" />
+          </OutputClaims>
+        </ClaimsTransformation>    
+  
+        <!--Sample: Removes an issuer from the  claim from the userIdentities collection-->
+        <ClaimsTransformation Id="RemoveUserIdentityFromCollectionByIssuer" TransformationMethod="RemoveUserIdentityFromCollectionByIssuer">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="issuerToUnlink" TransformationClaimType="issuer" />
+            <InputClaim ClaimTypeReferenceId="userIdentities" TransformationClaimType="collection" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userIdentities" TransformationClaimType="collection" />
+          </OutputClaims>
+        </ClaimsTransformation>    
+  
+        <!--Sample: Extracts the list of social identity providers associated with the user -->
+        <ClaimsTransformation Id="ExtractIssuers" TransformationMethod="GetIssuersFromUserIdentityCollectionTransformation">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="userIdentities" TransformationClaimType="userIdentityCollection" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="issuers" TransformationClaimType="issuersCollection" />
+          </OutputClaims>
+        </ClaimsTransformation> 
+          
+        <!-- Assign the value in the claim 'givenName' to the claim 'displayName' -->
+        <ClaimsTransformation Id="CopyGivenName" TransformationMethod="CopyClaim">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="givenName" TransformationClaimType="inputClaim"/>
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="displayName" TransformationClaimType="outputClaim"/>
+          </OutputClaims>
+        </ClaimsTransformation>  
+        
+        <!--Sample: Extracts the list of social identity providers associated with the user -->
+        <ClaimsTransformation Id="ExtractCurrentIssuers" TransformationMethod="GetIssuersFromUserIdentityCollectionTransformation">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="currentUserIdentities" TransformationClaimType="userIdentityCollection" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="currentIssuers" TransformationClaimType="issuersCollection" />
+          </OutputClaims>
+        </ClaimsTransformation>
+  
+        <ClaimsTransformation Id="UserIdentitiesContainsCurrentIssuer" TransformationMethod="StringCollectionContainsClaim">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="currentIssuers" TransformationClaimType="collection" />
+            <InputClaim ClaimTypeReferenceId="identityProvider" TransformationClaimType="item" />
+          </InputClaims>
+          <InputParameters>
+            <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+          </InputParameters>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="containsIssuerAlready" TransformationClaimType="outputClaim" />
+          </OutputClaims>
+        </ClaimsTransformation>   
+        
+        <ClaimsTransformation Id="AppendNewUserIdentityToCurrentUserIdentities" TransformationMethod="AddItemToUserIdentityCollection">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="userIdentity" TransformationClaimType="item" />
+            <InputClaim ClaimTypeReferenceId="currentUserIdentities" TransformationClaimType="collection" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="currentUserIdentities" TransformationClaimType="collection" />
+          </OutputClaims>
+        </ClaimsTransformation>
+  
+      </ClaimsTransformations>
+  
+      <ContentDefinitions>
+        <!-- This content definition is to render an error page that displays unhandled errors. -->
+        <ContentDefinition Id="api.error">
+          <LoadUri>~/tenant/templates/AzureBlue/exception.cshtml</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:globalexception:1.2.1</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Error page</Item>
+          </Metadata>
+        </ContentDefinition>
+        <ContentDefinition Id="api.idpselections">
+          <LoadUri>{Settings:IdPSelectionStaticFile}</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Idp selection page</Item>
+            <Item Key="language.intro">Sign in</Item>
+          </Metadata>
+        </ContentDefinition>
+        <ContentDefinition Id="api.idpselections.signup">
+          <LoadUri>~/tenant/templates/AzureBlue/idpSelector.cshtml</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Idp selection page</Item>
+            <Item Key="language.intro">Sign up</Item>
+          </Metadata>
+        </ContentDefinition>
+        <ContentDefinition Id="api.signuporsignin">
+          <LoadUri>{Settings:SignUpSignInStaticFile}</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:2.1.5</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Signin and Signup</Item>
+          </Metadata>
+        </ContentDefinition>
+        <ContentDefinition Id="api.phonefactor">
+          <LoadUri>~/tenant/templates/AzureBlue/multifactor-1.0.0.cshtml</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:multifactor:1.2.5</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Multi-factor authentication page</Item>
+          </Metadata>
+        </ContentDefinition>
+        <ContentDefinition Id="api.selfasserted">
+          <LoadUri>~/tenant/templates/AzureBlue/selfAsserted.cshtml</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.7</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Collect information from user page</Item>
+          </Metadata>
+        </ContentDefinition>
+        <ContentDefinition Id="api.selfasserted.profileupdate">
+          <LoadUri>{Settings:ProfileUpdateStaticFile}</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.7</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Collect information from user page</Item>
+          </Metadata>
+        </ContentDefinition>
+        <ContentDefinition Id="api.localaccountsignup">
+          <LoadUri>{Settings:SignUpStaticFile}</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.7</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Local account sign up page</Item>
+          </Metadata>
+        </ContentDefinition>
+        <ContentDefinition Id="api.localaccountpasswordreset">
+          <LoadUri>~/tenant/templates/AzureBlue/selfAsserted.cshtml</LoadUri>
+          <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+          <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.7</DataUri>
+          <Metadata>
+            <Item Key="DisplayName">Local account change password page</Item>
+          </Metadata>
+        </ContentDefinition>
+      </ContentDefinitions>
+    </BuildingBlocks>
+  
+    <ClaimsProviders>
+      <ClaimsProvider>
+        <DisplayName>Azure Active Directory</DisplayName>
+        <TechnicalProfiles>
+          <TechnicalProfile Id="AAD-Common">
+            <DisplayName>Azure Active Directory</DisplayName>
+            <Metadata>
+              <Item Key="ApplicationObjectId">{Settings:AADApplicationObjectId}</Item>
+              <Item Key="ClientId">{Settings:AADClientId}</Item>
+            </Metadata>
+          </TechnicalProfile>
+           <!--Sample: use incoming email from social idp to try find a local account -->
+           <TechnicalProfile Id="AAD-FindLocalAccountWithSocialEmail">
+            <Metadata>
+              <Item Key="Operation">Read</Item>
+              <Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
+              <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">false</Item>
+              <Item Key="api-version">1.6</Item>
+            </Metadata>
+            <InputClaims>
+              <InputClaim ClaimTypeReferenceId="socialEmail" PartnerClaimType="signInNames.emailAddress" Required="true" />
+            </InputClaims>
+            <OutputClaims>
+              <OutputClaim ClaimTypeReferenceId="objectId" />
+              <OutputClaim ClaimTypeReferenceId="localAccountEmail" PartnerClaimType="signInNames.emailAddress" DefaultValue="false"/>
+              <OutputClaim ClaimTypeReferenceId="currentUserIdentities" PartnerClaimType="userIdentities"/>
+              <OutputClaim ClaimTypeReferenceId="extension_haspassword" DefaultValue="false"/>
+              <OutputClaim ClaimTypeReferenceId="localAccountUpn" PartnerClaimType="userPrincipalName"/>
+              <OutputClaim ClaimTypeReferenceId="extension_termsOfUseConsentDateTime" DefaultValue="2017-10-01T15:00:00.0000000Z" />
+            </OutputClaims>
+            <OutputClaimsTransformations>
+              <OutputClaimsTransformation ReferenceId="ExtractCurrentIssuers" />
+              <OutputClaimsTransformation ReferenceId="UserIdentitiesContainsCurrentIssuer" />
+              <OutputClaimsTransformation ReferenceId="AppendNewUserIdentityToCurrentUserIdentities" />
+              <OutputClaimsTransformation ReferenceId="GetCurrentDateTime" />
+              <OutputClaimsTransformation ReferenceId="IsTermsOfUseConsentRequiredForDateTime" />
+            </OutputClaimsTransformations>
+            <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          </TechnicalProfile>
+        </TechnicalProfiles>
+      </ClaimsProvider>
+      <ClaimsProvider>
+        <DisplayName>Local Account SignIn</DisplayName>
+        <TechnicalProfiles>
+          <TechnicalProfile Id="login-NonInteractive">
+            <Metadata>
+              <Item Key="client_id">{Settings:LocalAccountClientId}</Item>
+              <Item Key="IdTokenAudience">{Settings:LocalAccountIdTokenAudience}</Item>
+            </Metadata>
+            <InputClaims>
+              <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="{Settings:LocalAccountClientId}" />
+              <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="{Settings:LocalAccountIdTokenAudience}" />
+            </InputClaims>
+          </TechnicalProfile>        
+        </TechnicalProfiles>
+      </ClaimsProvider>
+      <ClaimsProvider>
+        <Domain>{Settings:ExternalDomainName}</Domain>
+        <DisplayName>{Settings:ExternalDomainDescription}</DisplayName>
+        <TechnicalProfiles>
+          <TechnicalProfile Id="AADExternal-OpenIdConnect">
+            <DisplayName>{Settings:ExternalDomainDescription}</DisplayName>
+            <Description>{Settings:ExternalDomainDescription}</Description>
+            <Protocol Name="OpenIdConnect"/>
+            <Metadata>
+              <Item Key="METADATA">https://login.microsoftonline.com/elastacloud.com/v2.0/.well-known/openid-configuration</Item>
+              <Item Key="client_id">{Settings:ExternalDomainClientId}</Item>
+              <Item Key="response_types">code</Item>
+              <Item Key="scope">openid profile email</Item>
+              <Item Key="response_mode">form_post</Item>
+              <Item Key="HttpBinding">POST</Item>
+              <Item Key="UsePolicyInRedirectUri">false</Item>
+            </Metadata>
+            <CryptographicKeys>
+              <Key Id="client_secret" StorageReferenceId="B2C_1A_ExternalDomainSecret"/>
+            </CryptographicKeys>
+            <OutputClaims>
+              <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="oid"/>
+              <OutputClaim ClaimTypeReferenceId="tenantId" PartnerClaimType="tid"/>
+              <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name" />
+              <OutputClaim ClaimTypeReferenceId="surName" PartnerClaimType="family_name" />
+              <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
+              <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
+              <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" AlwaysUseDefaultValue="true" />
+              <OutputClaim ClaimTypeReferenceId="identityProvider" PartnerClaimType="iss" />
+            </OutputClaims>
+            <OutputClaimsTransformations>
+              <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName"/>
+              <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName"/>
+              <OutputClaimsTransformation ReferenceId="CreateAlternativeSecurityId"/>
+              <OutputClaimsTransformation ReferenceId="CreateSubjectClaimFromAlternativeSecurityId"/>
+            </OutputClaimsTransformations>
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-SocialLogin"/>
+          </TechnicalProfile>
+        </TechnicalProfiles>
+      </ClaimsProvider>
+  
+      <ClaimsProvider>
+        <DisplayName>REST Functions</DisplayName>
+        <TechnicalProfiles>
+          <TechnicalProfile Id="REST-AuthB2CSignUp">
+            <DisplayName>Add user to the database</DisplayName>
+            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+            <Metadata>
+              <!-- Set the ServiceUrl with your own REST API endpoint -->
+              <Item Key="ServiceUrl">{Settings:SignUpFunction}</Item>
+              <Item Key="SendClaimsIn">Body</Item>
+              <!-- Set AuthenticationType to Basic or ClientCertificate in production environments -->
+              <Item Key="AuthenticationType">None</Item>
+              <!-- REMOVE the following line in production environments -->
+              <Item Key="AllowInsecureAuthInProduction">true</Item>
+            </Metadata>
+            <InputClaims>
+              <!-- Claims sent to your REST API -->
+              <InputClaim ClaimTypeReferenceId="objectId" />
+              <InputClaim ClaimTypeReferenceId="email" />
+              <InputClaim ClaimTypeReferenceId="displayName" />
+              <InputClaim ClaimTypeReferenceId="givenName" />
+              <InputClaim ClaimTypeReferenceId="surname" />
+  
+            </InputClaims>
+            <OutputClaims>
+              <!-- Claims parsed from your REST API -->
+              <OutputClaim ClaimTypeReferenceId="extension_Roles" />
+            </OutputClaims>
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          </TechnicalProfile>
+  
+          <TechnicalProfile Id="REST-AuthB2CSignIn">
+            <DisplayName>Get User roles from the database</DisplayName>
+            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+            <Metadata>
+              <!-- Set the ServiceUrl with your own REST API endpoint -->
+              <Item Key="ServiceUrl">{Settings:SignInFunction}</Item>
+              <Item Key="SendClaimsIn">Body</Item>
+              <!-- Set AuthenticationType to Basic or ClientCertificate in production environments -->
+              <Item Key="AuthenticationType">None</Item>
+              <!-- REMOVE the following line in production environments -->
+              <Item Key="AllowInsecureAuthInProduction">true</Item>
+            </Metadata>
+            <InputClaims>
+              <!-- Claims sent to your REST API -->
+              <InputClaim ClaimTypeReferenceId="objectId" />
+              <InputClaim ClaimTypeReferenceId="email"/>
+              <InputClaim ClaimTypeReferenceId="displayName" />
+              <InputClaim ClaimTypeReferenceId="givenName" />
+              <InputClaim ClaimTypeReferenceId="surname" />
+  
+            </InputClaims>
+            <OutputClaims>
+              <!-- Claims parsed from your REST API -->
+              <OutputClaim ClaimTypeReferenceId="extension_Roles" />
+            </OutputClaims>
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          </TechnicalProfile>
+  
+            <!-- Logically delete the user from the database -->
+            <TechnicalProfile Id="REST-AuthB2CDeleteUser">
+              <DisplayName>Delete the user from database</DisplayName>
+              <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+              <Metadata>
+                <!-- Set the ServiceUrl with your own REST API endpoint -->
+                <Item Key="ServiceUrl">{Settings:DeleteAccountFunction}</Item>
+                <Item Key="SendClaimsIn">Body</Item>
+                <!-- Set AuthenticationType to Basic or ClientCertificate in production environments -->
+                <Item Key="AuthenticationType">None</Item>
+                <!-- REMOVE the following line in production environments -->
+                <Item Key="AllowInsecureAuthInProduction">true</Item>
+              </Metadata>
+              <InputClaims>
+                <!-- Claims sent to your REST API -->
+                <InputClaim ClaimTypeReferenceId="objectId" />
+                <InputClaim ClaimTypeReferenceId="email" />
+              </InputClaims>
+              <OutputClaims />
+              <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+            </TechnicalProfile>
+            
+            <!-- Obtain an user email address from linkedIn api -->
+            <TechnicalProfile Id="API-LinkedInEmail">
+              <DisplayName>Get LinkedIn email</DisplayName>
+              <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+              <Metadata>
+                  <Item Key="ServiceUrl">https://api.linkedin.com/v2/emailAddress?q=members&amp;projection=(elements*(handle~))</Item>
+                  <Item Key="AuthenticationType">Bearer</Item>
+                  <Item Key="UseClaimAsBearerToken">identityProviderAccessToken</Item>
+                  <Item Key="SendClaimsIn">Url</Item>
+                  <Item Key="ResolveJsonPathsInJsonTokens">true</Item>
+              </Metadata>
+              <InputClaims>
+                  <InputClaim ClaimTypeReferenceId="identityProviderAccessToken" />
+              </InputClaims>
+              <OutputClaims>
+                  <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="elements[0].handle~.emailAddress" />
+                  <OutputClaim ClaimTypeReferenceId="socialEmail" PartnerClaimType="elements[0].handle~.emailAddress" />
+              </OutputClaims>
+              <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+            </TechnicalProfile>
+        
+        </TechnicalProfiles>
+      </ClaimsProvider>
+         <!-- Facebook claims provider -->
+         <ClaimsProvider>
+          <Domain>facebook.com</Domain>
+          <DisplayName>Facebook</DisplayName>
+          <TechnicalProfiles>
+            <TechnicalProfile Id="Facebook-OAUTH-Base">
+              <DisplayName>Sign In with Facebook</DisplayName>
+              <Protocol Name="OAuth2" />
+              <Metadata>
+                <Item Key="ProviderName">facebook</Item>
+                <Item Key="authorization_endpoint">https://www.facebook.com/dialog/oauth</Item>
+                <Item Key="AccessTokenEndpoint">https://graph.facebook.com/oauth/access_token</Item>
+                <Item Key="HttpBinding">GET</Item>
+                <Item Key="UsePolicyInRedirectUri">0</Item>
+                <Item Key="AccessTokenResponseFormat">json</Item>           
+                <Item Key="client_id">{Settings:FacebookClientId}</Item>
+                <Item Key="scope">email public_profile</Item>
+                <Item Key="ClaimsEndpoint">https://graph.facebook.com/me?fields=id,first_name,last_name,name,email</Item>
+              </Metadata>
+              <CryptographicKeys>
+                <Key Id="client_secret" StorageReferenceId="B2C_1A_FacebookSecret" />
+              </CryptographicKeys>
+              <InputClaims />
+            </TechnicalProfile>
+            <TechnicalProfile Id="Facebook-OAUTH-SignIn">
+              <OutputClaims>
+                <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="id" />
+                <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="first_name" />
+                <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="last_name" />
+                <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
+                <OutputClaim ClaimTypeReferenceId="socialEmail" PartnerClaimType="email" />
+                <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
+                <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="facebook.com" AlwaysUseDefaultValue="true" />
+                <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" AlwaysUseDefaultValue="true" />
+                <OutputClaim ClaimTypeReferenceId="isLocalSignUp" DefaultValue="false"/>
+              </OutputClaims>
+              <OutputClaimsTransformations>
+                <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName" />
+                <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName" />
+                <OutputClaimsTransformation ReferenceId="CreateUserIdentity" />
+                <OutputClaimsTransformation ReferenceId="AppendUserIdentity" />
+              </OutputClaimsTransformations>
+              <IncludeTechnicalProfile ReferenceId="Facebook-OAUTH-Base" />
+              <UseTechnicalProfileForSessionManagement ReferenceId="SM-SocialLogin" />
+            </TechnicalProfile>
+          </TechnicalProfiles>
+        </ClaimsProvider>
+         <!-- Microsoft claims provider -->
+      <ClaimsProvider>
+        <Domain>live.com</Domain>
+        <DisplayName>Microsoft Account</DisplayName>
+        <TechnicalProfiles>
+          <TechnicalProfile Id="MSA-OIDC-Base">
+            <DisplayName>Sign In with Microsoft</DisplayName>
+            <Protocol Name="OpenIdConnect" />
+            <Metadata>
+              <Item Key="ProviderName">https://login.live.com</Item>
+              <Item Key="METADATA">https://login.live.com/.well-known/openid-configuration</Item>
+              <Item Key="response_types">code</Item>
+              <Item Key="response_mode">form_post</Item>
+              <Item Key="scope">openid profile email</Item>
+              <Item Key="HttpBinding">POST</Item>
+              <Item Key="UsePolicyInRedirectUri">0</Item>            
+              <!--Sample action required: Change to your Microsoft App Id-->
+              <Item Key="client_id">{Settings:MicrosoftClientId}</Item>
+            </Metadata>
+            <CryptographicKeys>
+              <Key Id="client_secret" StorageReferenceId="B2C_1A_MSASecret" />            
+            </CryptographicKeys>
+          </TechnicalProfile>
+          <TechnicalProfile Id="MSA-OIDC-SignIn">
+            <OutputClaims>
+              <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="live.com" />
+              <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" />
+              <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="sub" />
+              <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name" DefaultValue="GivenName"/>
+              <OutputClaim ClaimTypeReferenceId="surName" PartnerClaimType="family_name" DefaultValue="GivenName"/>
+              <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
+              <OutputClaim ClaimTypeReferenceId="email"/>
+              <OutputClaim ClaimTypeReferenceId="socialEmail" PartnerClaimType="email"/>
+              <OutputClaim ClaimTypeReferenceId="isLocalSignUp" DefaultValue="false"/>
+            </OutputClaims>
+            <OutputClaimsTransformations>
+              <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName" />
+              <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName" />
+              <OutputClaimsTransformation ReferenceId="CreateUserIdentity" />
+              <OutputClaimsTransformation ReferenceId="AppendUserIdentity" />
+            </OutputClaimsTransformations>
+            <IncludeTechnicalProfile ReferenceId="MSA-OIDC-Base" />
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-SocialLogin" />
+          </TechnicalProfile>
+        </TechnicalProfiles>
+      </ClaimsProvider>
+       <!-- LinkedIn claims provider -->
+       <ClaimsProvider>
+        <Domain>linkedin.com</Domain>
+        <DisplayName>LinkedIn</DisplayName>
+        <TechnicalProfiles>
+          <TechnicalProfile Id="LinkedIn-OAuth2-Base">
+            <DisplayName>Sign In with LinkedIn</DisplayName>
+            <Protocol Name="OAuth2" />
+            <Metadata>
+              <Item Key="ProviderName">linkedin</Item>
+              <Item Key="authorization_endpoint">https://www.linkedin.com/oauth/v2/authorization</Item>
+              <Item Key="AccessTokenEndpoint">https://www.linkedin.com/oauth/v2/accessToken</Item>
+              <Item Key="ClaimsEndpoint">https://api.linkedin.com/v2/me</Item>
+              <Item Key="scope">r_emailaddress r_liteprofile</Item>
+              <Item Key="HttpBinding">POST</Item>
+              <Item Key="external_user_identity_claim_id">id</Item>
+              <Item Key="BearerTokenTransmissionMethod">AuthorizationHeader</Item>
+              <Item Key="ResolveJsonPathsInJsonTokens">true</Item>
+              <Item Key="UsePolicyInRedirectUri">false</Item>
+              <Item Key="client_id">{Settings:LinkedInClientId}</Item>
+            </Metadata>
+            <CryptographicKeys>
+              <Key Id="client_secret" StorageReferenceId="B2C_1A_LinkedInSecret" />
+            </CryptographicKeys>
+            <InputClaims />         
+          </TechnicalProfile>
+          <TechnicalProfile Id="Linkedin-OAuth2-SignIn">
+            <DisplayClaims />
+            <OutputClaims>
+              <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="id" />
+              <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="firstName.localized" />
+              <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="lastName.localized" />
+              <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="emailAddress" />
+              <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
+              <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="linkedin.com" AlwaysUseDefaultValue="true" />
+              <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" AlwaysUseDefaultValue="true" />
+              <OutputClaim ClaimTypeReferenceId="identityProviderAccessToken" PartnerClaimType="{oauth2:access_token}" />
+              <OutputClaim ClaimTypeReferenceId="isLocalSignUp" DefaultValue="false"/>
+            </OutputClaims>
+            <OutputClaimsTransformations>
+              <OutputClaimsTransformation ReferenceId="ExtractGivenNameFromLinkedInResponse" />
+              <OutputClaimsTransformation ReferenceId="ExtractSurNameFromLinkedInResponse" />
+              <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName" />
+              <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName" />
+              <OutputClaimsTransformation ReferenceId="CreateUserIdentity" />
+              <OutputClaimsTransformation ReferenceId="AppendUserIdentity" />
+              <OutputClaimsTransformation ReferenceId="CopyGivenName" />
+              </OutputClaimsTransformations>
+            <IncludeTechnicalProfile ReferenceId="Linkedin-OAuth2-Base" />
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-SocialLogin" />
+          </TechnicalProfile>
+        </TechnicalProfiles>
+      </ClaimsProvider>
+       <!-- Google claims provider -->
+       <ClaimsProvider>
+        <Domain>google.com</Domain>
+        <DisplayName>Google</DisplayName>
+        <TechnicalProfiles>
+          <TechnicalProfile Id="Google-OAuth2-Base">
+            <DisplayName>Sign In with Google</DisplayName>
+            <Protocol Name="OAuth2" />
+            <Metadata>
+              <Item Key="ProviderName">google</Item>
+              <Item Key="authorization_endpoint">https://accounts.google.com/o/oauth2/auth</Item>
+              <Item Key="AccessTokenEndpoint">https://accounts.google.com/o/oauth2/token</Item>
+              <Item Key="ClaimsEndpoint">https://www.googleapis.com/oauth2/v1/userinfo</Item>
+              <Item Key="scope">email profile</Item>
+              <Item Key="HttpBinding">POST</Item>
+              <Item Key="UsePolicyInRedirectUri">false</Item>
+              <Item Key="client_id">{Settings:GoogleClientId}</Item>
+            </Metadata>
+            <CryptographicKeys>
+              <Key Id="client_secret" StorageReferenceId="B2C_1A_GoogleSecret" />
+            </CryptographicKeys>
+          </TechnicalProfile>
+          <TechnicalProfile Id="Google-OAuth2-SignIn">
+            <OutputClaims>
+              <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="id" />
+              <OutputClaim ClaimTypeReferenceId="socialEmail" PartnerClaimType="email"/>
+              <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
+              <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name" />
+              <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="family_name" />
+              <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
+              <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="google.com" />
+              <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" />
+              <OutputClaim ClaimTypeReferenceId="isLocalSignUp" DefaultValue="false"/>
+            </OutputClaims>
+            <OutputClaimsTransformations>
+              <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName" />
+              <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName" />
+              <OutputClaimsTransformation ReferenceId="CreateUserIdentity" />
+              <OutputClaimsTransformation ReferenceId="AppendUserIdentity" />
+            </OutputClaimsTransformations>
+            <IncludeTechnicalProfile ReferenceId="Google-OAuth2-Base" />
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-SocialLogin" />
+          </TechnicalProfile>
+        </TechnicalProfiles>
+      </ClaimsProvider>   
+    </ClaimsProviders>
+  </TrustFrameworkPolicy>
+  
